@@ -258,15 +258,6 @@ Frontend will run at:
 
 ---
 
-## 🚀 Future Improvements (Enterprise Roadmap)
-✅ API Keys per client  
-✅ Rate limit per user plan  
-✅ Scheduled scans  
-✅ Compare 2 reports  
-✅ Dark web leak check (HIBP API)  
-✅ Export PDF + JSON + CSV  
-✅ Cloud deployment with Docker + HTTPS  
-
 ---
 
 ## 📜 Disclaimer
