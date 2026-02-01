@@ -1,0 +1,553 @@
+/* =========================================
+   PortIntelX - Full Premium Stylesheet
+   - SaaS UI (Glass + Dark)
+   - Premium Navbar
+   - Cards / Tables / Inputs / Buttons
+   - Multi-Page PDF Print Layout (Page breaks)
+   - Cover Page + Page Headers
+========================================= */
+
+
+/* ==============================
+   Theme Variables
+============================== */
+
+:root {
+    --bg: #06080d;
+    --panel: rgba(20, 25, 35, 0.72);
+    --panel2: rgba(30, 36, 48, 0.65);
+    --border: rgba(255, 255, 255, 0.10);
+    --border2: rgba(255, 255, 255, 0.16);
+    --text: rgba(255, 255, 255, 0.92);
+    --muted: rgba(255, 255, 255, 0.65);
+    --primary: #00f5d4;
+    --primary2: #00c8ff;
+    --danger: #ff3b6b;
+    --warning: #ffb020;
+    --success: #22c55e;
+    --shadow: 0 14px 55px rgba(0, 0, 0, 0.55);
+    --radius: 22px;
+}
+
+
+/* ==============================
+   Reset / Base
+============================== */
+
+* {
+    box-sizing: border-box;
+    font-family: Inter, system-ui, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(1000px 500px at 30% 10%, rgba(0, 245, 212, 0.12), transparent 60%), radial-gradient(900px 500px at 90% 20%, rgba(0, 200, 255, 0.12), transparent 60%), var(--bg);
+    color: var(--text);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 22px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* ==============================
+   Premium Navbar (PortIntelX)
+============================== */
+
+.pxNav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 14px 0;
+    backdrop-filter: blur(16px);
+}
+
+.pxNavInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    box-shadow: var(--shadow);
+}
+
+.pxBrand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pxLogo {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, var(--primary), var(--primary2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pxTag {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.pxNavLinks {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.pxNavBtn {
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 800;
+    transition: 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.pxNavBtn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 245, 212, 0.40);
+    box-shadow: 0 10px 28px rgba(0, 245, 212, 0.15);
+}
+
+.pxActive {
+    border-color: rgba(0, 245, 212, 0.50);
+    background: rgba(0, 245, 212, 0.10);
+}
+
+.pxLogout {
+    border-color: rgba(255, 59, 107, 0.45);
+    background: rgba(255, 59, 107, 0.12);
+}
+
+.pxLogout:hover {
+    box-shadow: 0 10px 28px rgba(255, 59, 107, 0.18);
+}
+
+
+/* ==============================
+   Cards / Layout
+============================== */
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 950;
+    letter-spacing: 0.4px;
+}
+
+.sub {
+    margin-top: 8px;
+    opacity: 0.75;
+    line-height: 1.6;
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+@media (max-width: 900px) {
+    .grid2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==============================
+   Badges
+============================== */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 900;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border2);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+
+/* ==============================
+   Buttons / Inputs
+============================== */
+
+.btn {
+    border: 1px solid var(--border2);
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btnPrimary {
+    width: auto;
+    background: linear-gradient(90deg, rgba(0, 245, 212, 0.20), rgba(0, 200, 255, 0.18));
+    color: var(--text);
+    border-color: rgba(0, 245, 212, 0.35);
+}
+
+.btnPrimary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(0, 245, 212, 0.20);
+}
+
+.btnGhost {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+}
+
+.btnGhost:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(255, 255, 255, 0.10);
+}
+
+.btnDanger {
+    background: rgba(255, 59, 107, 0.14);
+    border-color: rgba(255, 59, 107, 0.35);
+    color: var(--text);
+}
+
+.btnDanger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(255, 59, 107, 0.22);
+}
+
+.input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    margin-top: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text);
+    outline: none;
+}
+
+.input:focus {
+    border-color: rgba(0, 245, 212, 0.45);
+    box-shadow: 0 0 0 3px rgba(0, 245, 212, 0.12);
+}
+
+label {
+    font-weight: 900;
+    opacity: 0.85;
+}
+
+
+/* ==============================
+   Tables
+============================== */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.table th,
+.table td {
+    padding: 12px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: left;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+.table th {
+    opacity: 0.85;
+    font-weight: 950;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.table tr:hover td {
+    background: rgba(0, 245, 212, 0.035);
+}
+
+
+/* ==============================
+   Print Pages (Enterprise Multi Page)
+============================== */
+
+.printPage {
+    margin-top: 14px;
+}
+
+
+/* controls hidden while printing */
+
+.noPrint {
+    display: block;
+}
+
+
+/* default hidden, shown in print */
+
+.pxPrintHeader {
+    display: none;
+}
+
+
+/* ==============================
+   Cover Page Styles
+============================== */
+
+.pxCover {
+    min-height: 760px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pxCoverTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.pxCoverTitle {
+    font-size: 54px;
+    font-weight: 1000;
+    letter-spacing: 0.8px;
+    background: linear-gradient(90deg, var(--primary), var(--primary2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pxCoverSub {
+    margin-top: 6px;
+    opacity: 0.75;
+    font-size: 15px;
+}
+
+.pxCoverRight {
+    text-align: right;
+}
+
+.pxCoverBox {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.pxCoverRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pxCoverRow:last-child {
+    border-bottom: none;
+}
+
+.pxCoverKey {
+    opacity: 0.7;
+    font-weight: 900;
+}
+
+.pxCoverVal {
+    font-weight: 1000;
+    text-align: right;
+    word-break: break-word;
+}
+
+.pxCoverFooter {
+    margin-top: 18px;
+    opacity: 0.65;
+    font-size: 13px;
+}
+
+
+/* ==============================
+   Print Header (Page Top Bar)
+============================== */
+
+.pxPrintBrand {
+    font-size: 16px;
+    font-weight: 1000;
+}
+
+.pxPrintMeta {
+    font-size: 12px;
+    opacity: 0.75;
+}
+
+.pxPrintPage {
+    font-size: 12px;
+    opacity: 0.75;
+    text-align: right;
+}
+
+.pxPrintSection {
+    font-size: 13px;
+    font-weight: 950;
+    text-align: right;
+}
+
+
+/* ==============================
+   PRINT MODE
+============================== */
+
+@media print {
+    /* Hide app navbar & buttons in PDF */
+    .pxNav,
+    .btn,
+    button {
+        display: none !important;
+    }
+    .noPrint {
+        display: none !important;
+    }
+    /* Show report header on each page (except cover) */
+    .pxPrintHeader {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 4px 12px 4px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        margin-bottom: 12px;
+        color: black !important;
+    }
+    .pxPrintHeaderLeft,
+    .pxPrintHeaderRight {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+    /* ✅ Force each section on new PDF page */
+    .printPage {
+        page-break-after: always;
+        break-after: page;
+        margin-top: 0 !important;
+    }
+    .printLastPage {
+        page-break-after: auto !important;
+        break-after: auto !important;
+    }
+    /* Print colors */
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    .container {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    .card {
+        background: white !important;
+        box-shadow: none !important;
+        border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        color: black !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    .badge {
+        background: rgba(0, 0, 0, 0.04) !important;
+        border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        color: black !important;
+    }
+    .table th {
+        background: rgba(0, 0, 0, 0.04) !important;
+        color: black !important;
+    }
+    .table td {
+        color: black !important;
+    }
+    /* ensure charts fit page */
+    canvas,
+    svg {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    /* ==============================
+   Report Logo Styling
+============================== */
+    .pxLogoPreview {
+        width: 100%;
+        max-width: 260px;
+        height: 90px;
+        object-fit: contain;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 10px;
+    }
+    .pxCoverLogo {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 12px;
+    }
+    .pxCoverLogoFallback {
+        width: 120px;
+        height: 120px;
+        border-radius: 22px;
+        border: 1px dashed rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.02);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 1000;
+        opacity: 0.7;
+        letter-spacing: 2px;
+    }
+    .pxPrintLogo {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        background: rgba(0, 0, 0, 0.04);
+        padding: 4px;
+    }
+}
