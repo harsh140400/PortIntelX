@@ -144,7 +144,7 @@ PortIntelX/
 
 ### 1️⃣ Clone Repo
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/harsh140400/PortIntelX
 cd PortIntelX
 ```
 
@@ -194,15 +194,6 @@ npm run dev
 
 Frontend will run at:
 ✅ `http://localhost:5173`
-
----
-
-## 🔐 Admin Login (Only for You)
-✅ Default Admin:
-- **Email:** `admin@portintelx.com`
-- **Password:** `Admin@123`
-
-> ⚠️ Do NOT expose this publicly. Change it after deployment.
 
 ---
 
