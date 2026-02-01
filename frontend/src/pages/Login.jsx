@@ -1,84 +1,95 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { apiPost } from "../api";
 
 export default function Login() {
-  const [email, setEmail] = useState("admin@portintelx.com");
-  const [password, setPassword] = useState("Admin@123");
-  const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
+
+  // ✅ Keep empty (no default admin credentials)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleLogin(e) {
     e.preventDefault();
+    setError("");
     setLoading(true);
 
-    const res = await apiPost("/auth/login", {
-      email,
-      password,
-    });
+    try {
+      const res = await apiPost("/auth/login", { email, password });
 
-    setLoading(false);
+      if (!res?.success) {
+        setError(res?.detail || "Login failed. Please try again.");
+        setLoading(false);
+        return;
+      }
 
-    if (!res.success) {
-      alert(res.detail || "Login failed");
-      return;
+      // ✅ Store token + role
+      localStorage.setItem("token", res.token);
+      localStorage.setItem("role", res.role);
+
+      // ✅ Redirect
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Server error. Please check backend is running.");
+    } finally {
+      setLoading(false);
     }
-
-    // ✅ Save token
-    localStorage.setItem("token", res.token);
-    localStorage.setItem("role", res.role);
-    localStorage.setItem("user", JSON.stringify(res.user));
-
-    // ✅ Redirect
-    navigate("/dashboard");
   }
 
   return (
     <div className="container">
-      <div className="card" style={{ maxWidth: 520, margin: "40px auto" }}>
+      <div className="card" style={{ maxWidth: 520, margin: "60px auto" }}>
         <div className="title">🔐 Login</div>
         <p className="sub">
           Sign in to PortIntelX to scan targets, view reports, and manage risk analytics.
         </p>
 
-        <form onSubmit={handleLogin} style={{ marginTop: 16 }}>
+        {error && (
+          <div style={{ marginTop: 12 }} className="badge">
+            ❌ {error}
+          </div>
+        )}
+
+        <form onSubmit={handleLogin} style={{ marginTop: 18 }}>
           <label>Email</label>
           <input
             className="input"
+            type="email"
+            placeholder="Enter your email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="admin@portintelx.com"
+            required
           />
 
-          <label style={{ marginTop: 12 }}>Password</label>
+          <label style={{ marginTop: 14, display: "block" }}>Password</label>
           <input
             className="input"
             type="password"
+            placeholder="Enter your password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Admin@123"
+            required
           />
 
           <button
             className="btn btnPrimary"
-            style={{ width: "100%", marginTop: 16 }}
-            type="submit"
+            style={{ width: "100%", marginTop: 18 }}
             disabled={loading}
           >
-            {loading ? "Logging in..." : "✅ Login"}
+            ✅ {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        <div style={{ marginTop: 14 }}>
-          <button
-            className="btn btnGhost"
-            style={{ width: "100%" }}
-            onClick={() => navigate("/register")}
-          >
+        <Link to="/register">
+          <button className="btn btnGhost" style={{ width: "100%", marginTop: 12 }}>
             ➕ Create New Account
           </button>
-        </div>
+        </Link>
       </div>
     </div>
   );

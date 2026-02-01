@@ -31,7 +31,7 @@ API_ACCESS_KEY = os.getenv("PORTINTELX_API_KEY", "PORTINTELX_DEMO_KEY")
 
 limiter = Limiter(key_func=get_remote_address)
 
-app = FastAPI(title="PortIntelX API", version="3.2.0")
+app = FastAPI(title="PortIntelX API", version="3.3.0")
 app.state.limiter = limiter
 
 @app.exception_handler(RateLimitExceeded)
@@ -217,7 +217,6 @@ async def run_scan(
             if base_query:
                 queries_to_try.append(base_query)
 
-            # ✅ Fallback if product/version not found
             if service_name and service_name not in queries_to_try:
                 queries_to_try.append(service_name)
 
@@ -241,7 +240,7 @@ async def run_scan(
                 cve_notes.append({
                     "service": svc.get("name", ""),
                     "port": svc.get("port", ""),
-                    "reason": "No CVEs matched (may be hardened or API lookup mismatch)."
+                    "reason": "No CVEs matched (API mismatch / unknown version / hardened deployment)."
                 })
 
     risk = calculate_risk(open_ports, cve_findings, sec_headers, tech)
@@ -316,9 +315,27 @@ def admin_get_users(db: Session = Depends(get_db), admin: User = Depends(admin_o
         "created_at": str(u.created_at)
     } for u in users]
 
+@app.delete("/admin/users/{user_id}")
+def admin_delete_user(user_id: int, db: Session = Depends(get_db), admin: User = Depends(admin_only)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # ✅ Prevent deleting self
+    if user.id == admin.id:
+        raise HTTPException(status_code=400, detail="Admin cannot delete their own account")
+
+    # ✅ Prevent deleting other admins (recommended)
+    if user.role == "admin":
+        raise HTTPException(status_code=400, detail="Admin accounts cannot be deleted")
+
+    db.delete(user)
+    db.commit()
+    return {"success": True, "message": f"User {user.email} deleted successfully"}
+
 @app.get("/admin/scans")
 def admin_all_scans(db: Session = Depends(get_db), admin: User = Depends(admin_only)):
-    scans = db.query(ScanHistory).order_by(ScanHistory.id.desc()).limit(100).all()
+    scans = db.query(ScanHistory).order_by(ScanHistory.id.desc()).limit(200).all()
     return [{
         "id": s.id,
         "user_id": s.user_id,
